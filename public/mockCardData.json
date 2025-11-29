@@ -1,0 +1,122 @@
+[
+    {
+        "id": "1",
+        "term": "Technical Debt",
+        "definition": "The implied cost of additional rework caused by choosing an easy solution now instead of using a better approach that would take longer.",
+        "translation": "技术债 (Engineering Quality)",
+        "example": "We prioritized launching the feature quickly, but I documented the technical debt and scheduled a sprint specifically to refactor the code later.",
+        "category": "Engineering",
+        "nextReview": 1735689600000,
+        "interval": 0,
+        "easeFactor": 2.5,
+        "streak": 0
+    },
+    {
+        "id": "2",
+        "term": "Disagree and Commit",
+        "definition": "A management principle where individuals are allowed to disagree while a decision is being made, but once a decision is made, everyone must support it.",
+        "translation": "保留己见，全力执行 (Conflict/Leadership)",
+        "example": "Although I preferred a SQL database, the team voted for NoSQL. I applied the 'disagree and commit' principle and optimized our schema for MongoDB.",
+        "category": "Conflict",
+        "nextReview": 1735689600000,
+        "interval": 0,
+        "easeFactor": 2.5,
+        "streak": 0
+    },
+    {
+        "id": "3",
+        "term": "Single Point of Failure",
+        "definition": "A part of a system that, if it fails, will stop the entire system from working.",
+        "translation": "单点故障 (System Design)",
+        "example": "I noticed the load balancer was a single point of failure, so I proposed adding a redundant backup to ensure high availability.",
+        "category": "System Design",
+        "nextReview": 1735689600000,
+        "interval": 0,
+        "easeFactor": 2.5,
+        "streak": 0
+    },
+    {
+        "id": "4",
+        "term": "Legacy Code",
+        "definition": "Source code that relates to a no-longer-supported or older version of the software.",
+        "translation": "遗留代码/老旧代码 (Refactoring)",
+        "example": "I was tasked with refactoring a module of legacy code. I first wrote unit tests to ensure no regressions before modernizing the syntax.",
+        "category": "Refactoring",
+        "nextReview": 1735689600000,
+        "interval": 0,
+        "easeFactor": 2.5,
+        "streak": 0
+    },
+    {
+        "id": "5",
+        "term": "Root Cause Analysis",
+        "definition": "A method of problem solving used for identifying the root causes of faults or problems.",
+        "translation": "根本原因分析 (Problem Solving)",
+        "example": "After the outage, I led a root cause analysis (RCA) and discovered a memory leak in the microservice, which we fixed by updating the garbage collection config.",
+        "category": "Problem Solving",
+        "nextReview": 1735689600000,
+        "interval": 0,
+        "easeFactor": 2.5,
+        "streak": 0
+    },
+    {
+        "id": "6",
+        "term": "Cross-functional",
+        "definition": "Denoting or relating to a system whereby people from different areas of an organization work together as a team.",
+        "translation": "跨职能 (Collaboration)",
+        "example": "I worked in a cross-functional team with PMs and designers to ensure the new API met both frontend requirements and business logic.",
+        "category": "Collaboration",
+        "nextReview": 1735689600000,
+        "interval": 0,
+        "easeFactor": 2.5,
+        "streak": 0
+    },
+    {
+        "id": "7",
+        "term": "Spearhead",
+        "definition": "Lead an attack or movement; be the leader of.",
+        "translation": "带头；主导 (Leadership)",
+        "example": "I spearheaded the migration from a monolith to microservices, improving our deployment velocity by 300%.",
+        "category": "Leadership",
+        "nextReview": 1735689600000,
+        "interval": 0,
+        "easeFactor": 2.5,
+        "streak": 0
+    },
+    {
+        "id": "8",
+        "term": "Trade-off",
+        "definition": "A balance achieved between two desirable but incompatible features.",
+        "translation": "权衡/取舍 (Decision Making)",
+        "example": "We faced a trade-off between latency and consistency. Given it was a payment system, I prioritized consistency over speed.",
+        "category": "Decision Making",
+        "nextReview": 1735689600000,
+        "interval": 0,
+        "easeFactor": 2.5,
+        "streak": 0
+    },
+    {
+        "id": "9",
+        "term": "Scalability",
+        "definition": "The capacity to be changed in size or scale.",
+        "translation": "可扩展性 (System Design)",
+        "example": "To ensure scalability, I implemented Redis caching, which reduced database load by 50% during peak traffic.",
+        "category": "System Design",
+        "nextReview": 1735689600000,
+        "interval": 0,
+        "easeFactor": 2.5,
+        "streak": 0
+    },
+    {
+        "id": "10",
+        "term": "Bottleneck",
+        "definition": "A point of congestion that slows down a process.",
+        "translation": "瓶颈 (Performance)",
+        "example": "Profiling revealed the image processing service was the bottleneck. Moving it to an async worker queue resolved the latency issues.",
+        "category": "Performance",
+        "nextReview": 1735689600000,
+        "interval": 0,
+        "easeFactor": 2.5,
+        "streak": 0
+    }
+]
