@@ -28,21 +28,23 @@ const Dashboard = ({ allCards, setMode, startSession }: DashboardProps) => {
     };
 
     return (
-        <div className="space-y-6 animate-fade-in pb-12">
-            <header className="flex justify-between items-center mb-6">
+        <div data-name={'dashboard-container'} className="">
+            {/* Header */}
+            <header className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                    <h1 className="font-bold text-nowrap text-slate-800 flex items-center gap-2">
                         <Code className="w-8 h-8 text-indigo-600" />
                         Dev BQ Master
                     </h1>
                     <p className="text-slate-500 text-sm">程序员行为面试高频短语</p>
                 </div>
-                <button onClick={resetData} className="text-slate-300 hover:text-red-400 p-2">
+                <button onClick={resetData} className="text-slate-300">
                     <RotateCcw className="w-5 h-5" />
                 </button>
             </header>
 
-            <div className="grid grid-cols-2 gap-4">
+            {/* Review and Master Stats */}
+            <div data-name={'stats-container'} className="grid grid-cols-2 gap-4">
                 <div className="bg-gradient-to-br from-indigo-600 to-indigo-700 p-5 rounded-2xl text-white shadow-lg shadow-indigo-200">
                     <div className="flex items-center gap-2 mb-2 opacity-90">
                         <Clock className="w-4 h-4" />
@@ -62,20 +64,22 @@ const Dashboard = ({ allCards, setMode, startSession }: DashboardProps) => {
                 </div>
             </div>
 
+            {/* Start Session Button */}
             <button
                 onClick={startSession}
                 disabled={dueCount === 0}
                 className={`w-full py-4 rounded-xl font-bold text-lg shadow-md transition-all flex items-center justify-center gap-2
-          ${
-              dueCount > 0
-                  ? 'bg-slate-900 text-white hover:bg-slate-800 hover:scale-[1.02] active:scale-[0.98]'
-                  : 'bg-slate-200 text-slate-400 cursor-not-allowed'
-          }`}
+                 ${
+                     dueCount > 0
+                         ? 'bg-slate-900 text-white hover:bg-slate-800 hover:scale-[1.02] active:scale-[0.98]'
+                         : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                 }`}
             >
                 <BookOpen className="w-5 h-5" />
                 {dueCount > 0 ? '开始今日复习' : '今日任务已完成'}
             </button>
 
+            {/* Cards List */}
             <div className="mt-8">
                 <div className="flex justify-between items-center mb-4">
                     <h3 className="font-bold text-slate-700">词汇库 ({allCards.length})</h3>

@@ -6,6 +6,11 @@ import Summary from '@/components/Summary.tsx';
 import { type Card, Mode } from '@/types/flashCard.ts';
 import { selectAllCards } from '@/stores/cardSelectors.ts';
 import { useAppSelector } from '@/stores/useAppSelector.ts';
+import { get } from '@/api/common.ts';
+import { SERVER_DATA_PATH } from '@/constants/pathUrls.ts';
+import { useAppDispatch } from '@/stores/useAppDispatch.ts';
+import { setCards } from '@/stores/cardSlice.ts';
+import type { GetCardsOkResponse } from '@/types/apiTypes.ts';
 
 const FlashCard = () => {
     const allCards = useAppSelector(selectAllCards);
@@ -14,10 +19,32 @@ const FlashCard = () => {
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
     const [isFlipped, setIsFlipped] = useState(false);
     const [sessionStats, setSessionStats] = useState({ reviewed: 0, correct: 0 });
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        // TODO: Save to database
-    }, [allCards]);
+        const loadAllCards = async () => {
+            const allCards = await get<GetCardsOkResponse>(SERVER_DATA_PATH.cards);
+            if (allCards)
+                dispatch(
+                    setCards(
+                        allCards.map((card) => ({
+                            id: card.id,
+                            term: card.term,
+                            definition: card.definition,
+                            translation: card.translation,
+                            example: card.example,
+                            category: card.category,
+                            nextReview: card.nextReview,
+                            interval: card.interval,
+                            easeFactor: card.easeFactor,
+                            streak: card.streak
+                        }))
+                    )
+                );
+        };
+
+        void loadAllCards();
+    }, [dispatch]);
 
     const startSession = () => {
         const due = allCards.filter((c) => c.nextReview <= Date.now()).sort((a, b) => a.nextReview - b.nextReview);
@@ -33,26 +60,27 @@ const FlashCard = () => {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 font-sans text-slate-900 flex justify-center">
-            <div className="w-full max-w-md bg-white min-h-screen sm:min-h-[800px] sm:h-[800px] sm:my-8 sm:rounded-[3rem] sm:shadow-2xl sm:border-[8px] sm:border-slate-800 overflow-hidden relative">
-                <div className="h-full overflow-y-auto scrollbar-hide p-6">
-                    {mode === Mode.Dashboard && (
-                        <Dashboard allCards={allCards} setMode={setMode} startSession={startSession} />
-                    )}
-                    {mode === Mode.Study && (
-                        <StudySession
-                            studyQueue={studyQueue}
-                            isFlipped={isFlipped}
-                            setIsFlipped={setIsFlipped}
-                            currentCardIndex={currentCardIndex}
-                            setCurrentCardIndex={setCurrentCardIndex}
-                            setMode={setMode}
-                            setSessionStats={setSessionStats}
-                        />
-                    )}
-                    {mode === Mode.Add && <AddCard setMode={setMode} />}
-                    {mode === Mode.Summary && <Summary sessionStats={sessionStats} setMode={setMode} />}
-                </div>
+        <div
+            data-name={'flash-card-page'}
+            className="min-h-screen w-screen bg-slate-50 font-sans text-slate-900 flex justify-center"
+        >
+            <div className="w-full min-h-full overflow-y-auto scrollbar-hide p-6">
+                {mode === Mode.Dashboard && (
+                    <Dashboard allCards={allCards} setMode={setMode} startSession={startSession} />
+                )}
+                {mode === Mode.Study && (
+                    <StudySession
+                        studyQueue={studyQueue}
+                        isFlipped={isFlipped}
+                        setIsFlipped={setIsFlipped}
+                        currentCardIndex={currentCardIndex}
+                        setCurrentCardIndex={setCurrentCardIndex}
+                        setMode={setMode}
+                        setSessionStats={setSessionStats}
+                    />
+                )}
+                {mode === Mode.Add && <AddCard setMode={setMode} />}
+                {mode === Mode.Summary && <Summary sessionStats={sessionStats} setMode={setMode} />}
             </div>
         </div>
     );
