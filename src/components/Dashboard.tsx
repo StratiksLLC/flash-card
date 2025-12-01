@@ -5,6 +5,7 @@ import { useAppSelector } from '@/stores/useAppSelector.ts';
 import { selectDueCount, selectMasteredCount } from '@/stores/cardSelectors.ts';
 import { type Card, Mode } from '@/types/flashCard.ts';
 import useSpeaker from '@/hooks/useSpeaker.ts';
+import { useTranslation } from '@/hooks/useTranslation.ts';
 import type { Dispatch, SetStateAction } from 'react';
 
 interface DashboardProps {
@@ -18,12 +19,13 @@ const Dashboard = ({ allCards, setMode, startSession }: DashboardProps) => {
     const dueCount = useAppSelector(selectDueCount);
     const masteredCount = useAppSelector(selectMasteredCount);
     const { speak } = useSpeaker();
+    const { t } = useTranslation();
 
     const resetData = () => {
-        if (confirm('确定要重置所有数据并恢复默认词库吗？这将清除您的学习进度。')) {
+        if (confirm(t('dashboard.resetConfirm'))) {
             dispatch(resetCards());
             localStorage.removeItem('bq-cards-pro-v2');
-            alert('数据已重置');
+            alert(t('dashboard.dataReset'));
         }
     };
 
@@ -34,9 +36,9 @@ const Dashboard = ({ allCards, setMode, startSession }: DashboardProps) => {
                 <div>
                     <h1 className="font-bold text-nowrap text-slate-800 flex items-center gap-2">
                         <Code className="w-8 h-8 text-indigo-600" />
-                        Dev BQ Master
+                        {t('dashboard.title')}
                     </h1>
-                    <p className="text-slate-500 text-sm">程序员行为面试高频短语</p>
+                    <p className="text-slate-500 text-sm">{t('dashboard.subtitle')}</p>
                 </div>
                 <button onClick={resetData} className="text-slate-300">
                     <RotateCcw className="w-5 h-5" />
@@ -44,50 +46,55 @@ const Dashboard = ({ allCards, setMode, startSession }: DashboardProps) => {
             </header>
 
             {/* Review and Master Stats */}
-            <div data-name={'stats-container'} className="grid grid-cols-2 gap-4">
+            <div data-name={'stats-container'} className="grid grid-cols-2 gap-4 my-2">
                 <div className="bg-gradient-to-br from-indigo-600 to-indigo-700 p-5 rounded-2xl text-white shadow-lg shadow-indigo-200">
                     <div className="flex items-center gap-2 mb-2 opacity-90">
                         <Clock className="w-4 h-4" />
-                        <span className="text-xs font-semibold uppercase tracking-wider">待复习</span>
+                        <span className="text-xs font-semibold uppercase tracking-wider">
+                            {t('dashboard.dueReview')}
+                        </span>
                     </div>
                     <div className="text-4xl font-bold">{dueCount}</div>
-                    <div className="text-xs opacity-75 mt-1">个短语今日到期</div>
+                    <div className="text-xs opacity-75 mt-1">{t('dashboard.phrasesDueToday')}</div>
                 </div>
 
                 <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
                     <div className="flex items-center gap-2 mb-2 text-emerald-600">
                         <Brain className="w-4 h-4" />
-                        <span className="text-xs font-semibold uppercase tracking-wider">掌握程度</span>
+                        <span className="text-xs font-semibold uppercase tracking-wider">{t('dashboard.mastery')}</span>
                     </div>
                     <div className="text-4xl font-bold text-slate-800">{masteredCount}</div>
-                    <div className="text-xs text-slate-400 mt-1">个短语已形成肌肉记忆</div>
+                    <div className="text-xs text-slate-400 mt-1">{t('dashboard.phrasesMemorized')}</div>
                 </div>
             </div>
 
             {/* Start Session Button */}
-            <button
-                onClick={startSession}
-                disabled={dueCount === 0}
-                className={`w-full py-4 rounded-xl font-bold text-lg shadow-md transition-all flex items-center justify-center gap-2
-                 ${
-                     dueCount > 0
-                         ? 'bg-slate-900 text-white hover:bg-slate-800 hover:scale-[1.02] active:scale-[0.98]'
-                         : 'bg-slate-200 text-slate-400 cursor-not-allowed'
-                 }`}
-            >
-                <BookOpen className="w-5 h-5" />
-                {dueCount > 0 ? '开始今日复习' : '今日任务已完成'}
-            </button>
+            <div className="my-[12px] w-full" data-name={'start-session-button-container'}>
+                <button
+                    onClick={startSession}
+                    disabled={dueCount == 0}
+                    className={`w-full py-4 rounded-xl font-bold text-lg shadow-md transition-all flex items-center justify-center gap-2 ${
+                        dueCount > 0
+                            ? 'bg-slate-900 text-white hover:bg-slate-800 hover:scale-[1.02] active:scale-[0.98]'
+                            : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                    }`}
+                >
+                    <BookOpen className="w-5 h-5" />
+                    {dueCount > 0 ? t('dashboard.startReview') : t('dashboard.taskCompleted')}
+                </button>
+            </div>
 
             {/* Cards List */}
             <div className="mt-8">
                 <div className="flex justify-between items-center mb-4">
-                    <h3 className="font-bold text-slate-700">词汇库 ({allCards.length})</h3>
+                    <h3 className="font-bold text-slate-700">
+                        {t('dashboard.vocabulary')} ({allCards.length})
+                    </h3>
                     <button
                         onClick={() => setMode(Mode.Add)}
                         className="text-indigo-600 text-sm font-medium flex items-center gap-1 hover:bg-indigo-50 px-3 py-1.5 rounded-full transition-colors"
                     >
-                        <Plus className="w-4 h-4" /> 添加新词
+                        <Plus className="w-4 h-4" /> {t('dashboard.addNewPhrase')}
                     </button>
                 </div>
                 <div className="space-y-3">
@@ -114,7 +121,7 @@ const Dashboard = ({ allCards, setMode, startSession }: DashboardProps) => {
                                 </span>
                                 <button
                                     onClick={() => {
-                                        if (confirm('Delete this card?')) dispatch(removeCard(card.id));
+                                        if (confirm(t('flashCard.deleteCardConfirm'))) dispatch(removeCard(card.id));
                                     }}
                                     className="text-red-400 opacity-0 group-hover:opacity-100 p-2 hover:bg-red-50 rounded-full transition-all"
                                 >

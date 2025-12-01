@@ -3,6 +3,7 @@ import { type Dispatch, type SetStateAction, useState } from 'react';
 import { useAppDispatch } from '@/stores/useAppDispatch.ts';
 import { addCard } from '@/stores/cardSlice.ts';
 import { RotateCcw } from 'lucide-react';
+import { useTranslation } from '@/hooks/useTranslation.ts';
 
 interface AddCardProps {
     setMode: Dispatch<SetStateAction<Mode>>;
@@ -10,6 +11,7 @@ interface AddCardProps {
 
 const AddCard = ({ setMode }: AddCardProps) => {
     const dispatch = useAppDispatch();
+    const { t } = useTranslation();
     const [newCard, setNewCard] = useState({
         term: '',
         definition: '',
@@ -39,26 +41,30 @@ const AddCard = ({ setMode }: AddCardProps) => {
                 className="flex items-center gap-2 mb-6 cursor-pointer text-slate-500 hover:text-slate-800"
                 onClick={() => setMode(Mode.Dashboard)}
             >
-                <RotateCcw className="w-4 h-4" /> 返回
+                <RotateCcw className="w-4 h-4" /> {t('common.back')}
             </div>
-            <h2 className="text-2xl font-bold text-slate-800 mb-6">添加新短语</h2>
+            <h2 className="text-2xl font-bold text-slate-800 mb-6">{t('addCard.title')}</h2>
 
             <div className="space-y-4">
                 <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Phrase (短语/术语)</label>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-1">
+                        {t('addCard.phrase')}
+                    </label>
                     <input
                         className="w-full p-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-500 font-bold text-lg"
-                        placeholder="e.g. Technical Debt"
+                        placeholder={t('addCard.phrasePlaceholder')}
                         value={newCard.term}
                         onChange={(e) => setNewCard({ ...newCard, term: e.target.value })}
                     />
                 </div>
 
                 <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Chinese (中文释义)</label>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-1">
+                        {t('addCard.chinese')}
+                    </label>
                     <input
                         className="w-full p-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-500"
-                        placeholder="e.g. 技术债"
+                        placeholder={t('addCard.chinesePlaceholder')}
                         value={newCard.translation}
                         onChange={(e) => setNewCard({ ...newCard, translation: e.target.value })}
                     />
@@ -66,11 +72,11 @@ const AddCard = ({ setMode }: AddCardProps) => {
 
                 <div>
                     <label className="block text-xs font-bold text-slate-500 uppercase mb-1">
-                        Definition (英文定义)
+                        {t('addCard.definition')}
                     </label>
                     <textarea
                         className="w-full p-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-500 h-20"
-                        placeholder="Brief definition in English..."
+                        placeholder={t('addCard.definitionPlaceholder')}
                         value={newCard.definition}
                         onChange={(e) => setNewCard({ ...newCard, definition: e.target.value })}
                     />
@@ -78,18 +84,20 @@ const AddCard = ({ setMode }: AddCardProps) => {
 
                 <div>
                     <label className="block text-xs font-bold text-indigo-500 uppercase mb-1">
-                        STAR Example (面试例句)
+                        {t('addCard.starExample')}
                     </label>
                     <textarea
                         className="w-full p-3 bg-indigo-50 border border-indigo-100 rounded-xl focus:outline-none focus:border-indigo-500 h-24 text-sm"
-                        placeholder="I managed expectations by holding weekly syncs..."
+                        placeholder={t('addCard.starExamplePlaceholder')}
                         value={newCard.example}
                         onChange={(e) => setNewCard({ ...newCard, example: e.target.value })}
                     />
                 </div>
 
                 <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Category (分类)</label>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-1">
+                        {t('addCard.category')}
+                    </label>
                     <select
                         className="w-full p-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-500"
                         value={newCard.category}
@@ -109,7 +117,7 @@ const AddCard = ({ setMode }: AddCardProps) => {
                     onClick={handleAddCard}
                     className="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold shadow-lg hover:bg-indigo-700 active:scale-95 transition-all mt-4"
                 >
-                    保存到词库
+                    {t('addCard.saveToVocabulary')}
                 </button>
             </div>
         </div>

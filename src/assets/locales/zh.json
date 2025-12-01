@@ -1,0 +1,62 @@
+{
+    "common": {
+        "back": "返回",
+        "delete": "删除",
+        "save": "保存",
+        "cancel": "取消",
+        "confirm": "确认"
+    },
+    "dashboard": {
+        "title": "Dev BQ Master",
+        "subtitle": "程序员行为面试高频短语",
+        "dueReview": "待复习",
+        "phrasesDueToday": "个短语今日到期",
+        "mastery": "掌握程度",
+        "phrasesMemorized": "个短语已形成肌肉记忆",
+        "startReview": "开始今日复习",
+        "taskCompleted": "今日任务已完成",
+        "vocabulary": "词汇库",
+        "addNewPhrase": "添加新词",
+        "resetConfirm": "确定要重置所有数据并恢复默认词库吗？这将清除您的学习进度。",
+        "dataReset": "数据已重置"
+    },
+    "study": {
+        "progress": "进度",
+        "showAnswer": "显示答案",
+        "tapToSeeDetails": "Tap to see details",
+        "definition": "Definition",
+        "starExample": "STAR Example",
+        "tapToFlipBack": "Tap card to flip back",
+        "readExample": "Read Example",
+        "forgot": "忘记",
+        "restart": "重来",
+        "hard": "困难",
+        "medium": "一般",
+        "easy": "简单",
+        "days": "天"
+    },
+    "addCard": {
+        "title": "添加新短语",
+        "phrase": "Phrase (短语/术语)",
+        "phrasePlaceholder": "e.g. Technical Debt",
+        "chinese": "Chinese (中文释义)",
+        "chinesePlaceholder": "e.g. 技术债",
+        "definition": "Definition (英文定义)",
+        "definitionPlaceholder": "Brief definition in English...",
+        "starExample": "STAR Example (面试例句)",
+        "starExamplePlaceholder": "I managed expectations by holding weekly syncs...",
+        "category": "Category (分类)",
+        "saveToVocabulary": "保存到词库"
+    },
+    "summary": {
+        "completed": "复习完成!",
+        "wellPrepared": "System Design 和 BQ 都准备得不错！",
+        "reviewedPhrases": "复习短语",
+        "accuracy": "记忆准确率",
+        "backToHome": "返回首页"
+    },
+    "flashCard": {
+        "noCardsToReview": "目前没有需要复习的单词！建议添加新词或休息一下。",
+        "deleteCardConfirm": "Delete this card?"
+    }
+}

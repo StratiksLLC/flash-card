@@ -1,0 +1,62 @@
+{
+    "common": {
+        "back": "Back",
+        "delete": "Delete",
+        "save": "Save",
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+    },
+    "dashboard": {
+        "title": "Dev BQ Master",
+        "subtitle": "Behavioral Interview High-Frequency Phrases for Programmers",
+        "dueReview": "Due Review",
+        "phrasesDueToday": "phrases due today",
+        "mastery": "Mastery",
+        "phrasesMemorized": "phrases memorized",
+        "startReview": "Start Today's Review",
+        "taskCompleted": "Today's Task Completed",
+        "vocabulary": "Vocabulary",
+        "addNewPhrase": "Add New Phrase",
+        "resetConfirm": "Are you sure you want to reset all data and restore the default word bank? This will clear your learning progress.",
+        "dataReset": "Data has been reset"
+    },
+    "study": {
+        "progress": "Progress",
+        "showAnswer": "Show Answer",
+        "tapToSeeDetails": "Tap to see details",
+        "definition": "Definition",
+        "starExample": "STAR Example",
+        "tapToFlipBack": "Tap card to flip back",
+        "readExample": "Read Example",
+        "forgot": "Forgot",
+        "restart": "Restart",
+        "hard": "Hard",
+        "medium": "Medium",
+        "easy": "Easy",
+        "days": "days"
+    },
+    "addCard": {
+        "title": "Add New Phrase",
+        "phrase": "Phrase",
+        "phrasePlaceholder": "e.g. Technical Debt",
+        "chinese": "Chinese Translation",
+        "chinesePlaceholder": "e.g. 技术债",
+        "definition": "Definition",
+        "definitionPlaceholder": "Brief definition in English...",
+        "starExample": "STAR Example",
+        "starExamplePlaceholder": "I managed expectations by holding weekly syncs...",
+        "category": "Category",
+        "saveToVocabulary": "Save to Vocabulary"
+    },
+    "summary": {
+        "completed": "Review Completed!",
+        "wellPrepared": "System Design and BQ are well prepared!",
+        "reviewedPhrases": "Reviewed Phrases",
+        "accuracy": "Memory Accuracy",
+        "backToHome": "Back to Home"
+    },
+    "flashCard": {
+        "noCardsToReview": "No cards to review! Consider adding new words or take a break.",
+        "deleteCardConfirm": "Delete this card?"
+    }
+}

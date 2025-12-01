@@ -11,6 +11,7 @@ import { SERVER_DATA_PATH } from '@/constants/pathUrls.ts';
 import { useAppDispatch } from '@/stores/useAppDispatch.ts';
 import { setCards } from '@/stores/cardSlice.ts';
 import type { GetCardsOkResponse } from '@/types/apiTypes.ts';
+import { useTranslation } from '@/hooks/useTranslation.ts';
 
 const FlashCard = () => {
     const allCards = useAppSelector(selectAllCards);
@@ -20,6 +21,7 @@ const FlashCard = () => {
     const [isFlipped, setIsFlipped] = useState(false);
     const [sessionStats, setSessionStats] = useState({ reviewed: 0, correct: 0 });
     const dispatch = useAppDispatch();
+    const { t } = useTranslation();
 
     useEffect(() => {
         const loadAllCards = async () => {
@@ -49,7 +51,7 @@ const FlashCard = () => {
     const startSession = () => {
         const due = allCards.filter((c) => c.nextReview <= Date.now()).sort((a, b) => a.nextReview - b.nextReview);
         if (due.length === 0) {
-            alert('目前没有需要复习的单词！建议添加新词或休息一下。');
+            alert(t('flashCard.noCardsToReview'));
             return;
         }
         setStudyQueue(due);
