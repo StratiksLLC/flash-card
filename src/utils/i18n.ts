@@ -22,7 +22,7 @@ export const initI18n = async () => {
             react: { useSuspense: false }
         });
 
-        const initialLng = localStorage.getItem('language') || 'en';
+        const initialLng = localStorage.getItem('language') || 'en'; // TODO: get from user parameter
         const resources = await loadLanguage(initialLng);
         i18n.addResourceBundle(initialLng, 'translation', resources, true, true);
         await i18n.changeLanguage(initialLng);
